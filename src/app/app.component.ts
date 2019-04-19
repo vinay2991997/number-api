@@ -1,3 +1,4 @@
+import { NumberDataService } from './number-data.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'number-api';
+  title = 'number-facts';
+  fact: string;
+  num: string;
+  constructor(private data: NumberDataService) {
+
+  }
+
+  getData() {
+    this.data.getData(Number.parseInt(this.num, 10)).subscribe((fact) => {
+      this.fact = fact;
+    },
+      (error) => console.log(error));
+  }
 }
